@@ -1,3 +1,17 @@
+/*
+Filename:
+    shared_mem_seg.c
+
+Authors:
+    Ian Goetting
+    Hang Ngo
+
+Description of program:
+    This is our solution to question 2 of the CS474 Programming #2 Assignment.
+    This program will create a new shared memory segment and print out values associated with it using the shmid_ds structure.. 
+    The values that are printed out include: Segment ID, Key, Mode, Owner UID, Size, and Number of attaches.
+*/
+
 #include<errno.h>
 #include<stdio.h>
 #include<sys/ipc.h>
@@ -5,6 +19,7 @@
 #include<stdlib.h>
 #include<string.h>
 
+//Function that prints out values for the shared memory segment that corresponds to the given segment_id.
 void print_shm_seg_values(int segment_id){
     struct shmid_ds shmbuffer;
     //Get the values for the segment ID
@@ -19,6 +34,8 @@ void print_shm_seg_values(int segment_id){
     printf("-------------------------------------\n");
     printf("Segment ID: %d\n",segment_id);
     printf("Key: %d\n",shmbuffer.shm_perm._key);
+    //The mode will include permissions + SHM_DEST flag + SHM_LOCKED flag
+    //Since we are only interested in the permissions, a bitwise and is used on the mode with octal 777.
     unsigned short mode = shmbuffer.shm_perm.mode & 0777;
     //Show only the first nine bits of the mode (i.e. permission bits)
     printf("Mode (in octal, permission bits only): %ho\n",mode);
@@ -26,7 +43,6 @@ void print_shm_seg_values(int segment_id){
     printf("Size: %zu\n",shmbuffer.shm_segsz);
     printf("Number of attaches: %d\n",shmbuffer.shm_nattch);
 }
-
 
 int main(){
     int segment_id;
@@ -38,7 +54,7 @@ int main(){
         shmctl(segment_id,IPC_RMID,NULL);
         exit(-1);
     }
-    //Print the values for the ID
+    //Pass the segment ID to the print function to print the segment's values out.
     print_shm_seg_values(segment_id);
     //Remove the shared memory segment based on the segment ID.
     shmctl(segment_id, IPC_RMID, NULL);
