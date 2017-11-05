@@ -8,7 +8,7 @@ Authors:
 
 Description of program:
     This is our solution to question 2 of the CS474 Programming #2 Assignment.
-    This program will create a new shared memory segment and print out values associated with it using the shmid_ds structure.. 
+    This program will create a new shared memory segment and print out values associated with it using the shmid_ds structure.
     The values that are printed out include: Segment ID, Key, Mode, Owner UID, Size, and Number of attaches.
 */
 
