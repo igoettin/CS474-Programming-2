@@ -17,7 +17,6 @@ Description of program:
 #include<sys/ipc.h>
 #include<sys/shm.h>
 #include<stdlib.h>
-#include<string.h>
 
 //Function that prints out values for the shared memory segment that corresponds to the given segment_id.
 void print_shm_seg_values(int segment_id){
@@ -55,7 +54,7 @@ int main(){
     }
     //Pass the segment ID to the print function to print the segment's values out.
     print_shm_seg_values(segment_id);
-    //Remove the shared memory segment based on the segment ID.
+    //Delete the shared memory segment based on the segment ID since we are finished with it.
     shmctl(segment_id, IPC_RMID, NULL);
 }
 
