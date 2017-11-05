@@ -29,7 +29,6 @@ void print_shm_seg_values(int segment_id){
         exit(-1);
     }
     //Print the values out
-    //printf("SHM_DEST IS %ho\n",shmbuffer.shm_perm.SHM_DEST);
     printf("Values for the shared memory segment:\n");
     printf("-------------------------------------\n");
     printf("Segment ID: %d\n",segment_id);
