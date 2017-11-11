@@ -59,7 +59,7 @@ void print_shared_memory_values(int segment_id){
 
 int main(int argv, char** argc){
     //Check an argument was given
-    if(argc[1] == NULL){
+    if(argv < 2){
         fprintf(stderr,"ERROR: No segment ID was passed to the program\n");
         exit(0);
     }
