@@ -1,3 +1,30 @@
+/*
+    Filename:
+        matrix_mul.c
+
+    Authors:
+        Ian Goetting
+        Hang Ngo
+
+    Description:
+        This program will perform matrix multiplication using pthreads and output the resulting matrix's contents to the terminal.
+        It takes as input two text files which represent the matrices that are being multiplied.
+        The first line of each file should contain the number of rows in the matrix, which should be an integer.
+        The second line of each file should contain the number of columns in the matrix, which should be an integer.
+        The rest of the lines in the file describe the matrix's contents through space separated integers.
+        An example of the format is shown below for a 3x2 matrix:
+        
+        3
+        2
+        1 4
+        2 5
+        3 6
+
+        If no input files are given, the program will calculate the multiplication of two default matrices.
+        
+
+*/
+
 #include<pthread.h>
 #include<stdio.h>
 #include<stdlib.h>
