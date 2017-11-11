@@ -7,6 +7,7 @@
         Hang Ngo
 
     Description:
+        This program is our solution to part 3 of the CS474 Programming Assignment #3.
         This program will perform matrix multiplication using pthreads and output the resulting matrix's contents to the terminal.
         It takes as input two text files which represent the matrices that are being multiplied.
         The first line of each file should contain the number of rows in the matrix, which should be an integer.
@@ -162,7 +163,7 @@ void multiply_matrices(FILE * A_file, FILE * B_file){
         }
         //Get num cols for B
         else if(fscanf(B_file,"%d",&B_col) == EOF){
-            fprintf(stderr,"The number of columns for matrix B is missing!\n");
+            fprintf(stderr,"The number of columns for matrix B is missing from the file!\n");
             exit(0);
         }
         //Dynamically allocate the A array.
@@ -171,7 +172,7 @@ void multiply_matrices(FILE * A_file, FILE * B_file){
         for(i = 0; i < A_row; i++)
             for(j = 0; j < A_col; j++){
                 if(fscanf(A_file,"%d",&temp) == EOF){
-                    fprintf(stderr, "There are not enough values given to fully fill the A array!\n");
+                    fprintf(stderr, "There are not enough values given in the file to fully fill the A array!\n");
                     exit(0);
                 }
                 A[i][j] = temp;
@@ -182,7 +183,7 @@ void multiply_matrices(FILE * A_file, FILE * B_file){
         for(i = 0; i < B_row; i++)
             for(j = 0; j < B_col; j++){
                 if(fscanf(B_file,"%d",&temp) == EOF){
-                    fprintf(stderr, "There are not enough values given to fully fill the A array!\n");
+                    fprintf(stderr, "There are not enough values given in the file to fully fill the B array!\n");
                     exit(0);
                 }
                 B[i][j] = temp;
