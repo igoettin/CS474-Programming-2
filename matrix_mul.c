@@ -34,7 +34,7 @@
 int M = 3;
 int K = 2;
 int N = 3;
-//Arrays for when files are given
+//Arrays for representing the matrices
 int ** A;
 int ** B;
 int ** C;
