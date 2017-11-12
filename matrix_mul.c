@@ -108,7 +108,6 @@ void create_threads(){
              data->j = j;
              pthread_create(&thread_ids[counter++],NULL,multiply_row_with_col,data);
          }
-    
     for(i = 0; i < M*N; i++)
          pthread_join(thread_ids[i],NULL);
     free(threads);
@@ -117,7 +116,6 @@ void create_threads(){
 void multiply_matrices(FILE * A_file, FILE * B_file){
     //First case, no files given, multiply the default matrices.
     if(A_file == NULL && B_file == NULL){
-        int i;
         //Dynamically allocate the A array with M rows and K columns.
         A = allocate_matrix(M,K);
         //Fill the A array with values
