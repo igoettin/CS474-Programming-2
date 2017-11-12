@@ -77,7 +77,7 @@ void deallocate_matrix(int ** S, int S_row){
 //Simple function that prints the contents of the matrix C
 //Precondition: C must be already allocated.
 void print_matrix_C(){
-    printf("\nThe product array C of the arrays A and B is calculated as: \n");
+    printf("\nThe product array C is calculated as: \n");
     int i,j;
     for(i = 0; i < M; i++){
         for(j = 0; j < N; j++)
