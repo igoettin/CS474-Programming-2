@@ -8,8 +8,9 @@
 
     Description:
         This program is our solution to part 3 of the CS474 Programming Assignment #2.
-        This program will perform matrix multiplication using pthreads and output the resulting matrix's contents to the terminal.
-        It takes as input two text files which represent the matrices that are being multiplied.
+        This program will perform matrix multiplication between two matrices (A and B) using pthreads,
+        and will output the resulting matrix (C) to the terminal.
+        This program takes as input two text files which represent the matrices that are being multiplied.
         The first line of each file should contain the number of rows in the matrix, which should be an integer.
         The second line of each file should contain the number of columns in the matrix, which should be an integer.
         The rest of the lines in the file describe the matrix's contents through space separated integers.
@@ -34,15 +35,23 @@
 int M = 3;
 int K = 2;
 int N = 3;
-//Arrays for representing the matrices
+//Pointers to pointers used for representing the matrices as a two dimensional array
+//Allocation for each matrix is dynamic (heap based), and occurs in the allocate_matrix function.
 int ** A;
 int ** B;
 int ** C;
 
+//Struct to hold the row and column assigned to each worker thread
 typedef struct{
     int i; //row
     int j; //column
 } thread_info;
+
+//Simple function that closes the two files for matrix A and B.
+void close_files(FILE * A_file, FILE * B_file){
+    fclose(A_file);
+    fclose(B_file);
+}
 
 //Function that contains the work performed by each worker thread.
 void * multiply_row_with_col(void * param){
@@ -144,26 +153,31 @@ void multiply_matrices(FILE * A_file, FILE * B_file){
         //Get num rows for A
         if(fscanf(A_file,"%d",&A_row) == EOF){
             fprintf(stderr,"The number of rows for matrix A is missing from the file!\n");
+            close_files(A_file,B_file);
             exit(0);
         }
         //Get num cols for A
         else if(fscanf(A_file,"%d",&A_col) == EOF){
             fprintf(stderr,"The number of columns for matrix A is missing from the file!\n");
+            close_files(A_file,B_file);
             exit(0);
         }
         //Get num rows for B
         if(fscanf(B_file,"%d",&B_row) == EOF){
             fprintf(stderr,"The number of rows for matrix B is missing from the file!\n");
+            close_files(A_file,B_file);
             exit(0);
         }
         //Check number of A columns matches number of B rows
         if(A_col != B_row){
             fprintf(stderr,"The number of columns for matrix A is not the same as the number of rows in matrix B. Cannot multiply.\n");
+            close_files(A_file,B_file);
             exit(0);
         }
         //Get num cols for B
         else if(fscanf(B_file,"%d",&B_col) == EOF){
             fprintf(stderr,"The number of columns for matrix B is missing from the file!\n");
+            close_files(A_file,B_file);
             exit(0);
         }
         //Dynamically allocate the A array.
@@ -173,6 +187,8 @@ void multiply_matrices(FILE * A_file, FILE * B_file){
             for(j = 0; j < A_col; j++){
                 if(fscanf(A_file,"%d",&temp) == EOF){
                     fprintf(stderr, "There are not enough values given in the file to fully fill the A array!\n");
+                    deallocate_matrix(A,A_row);
+                    close_files(A_file,B_file);
                     exit(0);
                 }
                 A[i][j] = temp;
@@ -184,6 +200,9 @@ void multiply_matrices(FILE * A_file, FILE * B_file){
             for(j = 0; j < B_col; j++){
                 if(fscanf(B_file,"%d",&temp) == EOF){
                     fprintf(stderr, "There are not enough values given in the file to fully fill the B array!\n");
+                    deallocate_matrix(A,A_row);
+                    deallocate_matrix(B,B_row);
+                    close_files(A_file,B_file);
                     exit(0);
                 }
                 B[i][j] = temp;
@@ -210,7 +229,6 @@ void process_input(int argv, char ** argc){
     if(argv == 1){
         //Handle default case, multiply default matrices
         multiply_matrices(NULL,NULL);
-        
     }
     //Check if the first filename was given but not the second
     else if(argv == 2){
@@ -223,16 +241,17 @@ void process_input(int argv, char ** argc){
         FILE * B_file = fopen(argc[2],"r");   
         if(A_file == NULL){
             fprintf(stderr,"ERROR: Could not open the first file!\n");
+            close_files(A_file,B_file);
             exit(0);
         }
         else if(B_file == NULL){
             fprintf(stderr,"ERROR: Could not open the second file!\n");
+            close_files(A_file,B_file);
             exit(0);
         }
         else
             multiply_matrices(A_file,B_file);
-        fclose(A_file);
-        fclose(B_file);
+        close_files(A_file,B_file);
     }
 }
 
