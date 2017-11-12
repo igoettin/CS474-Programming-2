@@ -7,7 +7,7 @@
         Hang Ngo
 
     Description:
-        This program is our solution to part 3 of the CS474 Programming Assignment #3.
+        This program is our solution to part 3 of the CS474 Programming Assignment #2.
         This program will perform matrix multiplication using pthreads and output the resulting matrix's contents to the terminal.
         It takes as input two text files which represent the matrices that are being multiplied.
         The first line of each file should contain the number of rows in the matrix, which should be an integer.
