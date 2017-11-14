@@ -11,7 +11,7 @@
 
 The files in this directory contain our solutions to the CS474 Programming Assignment 2. 
 pipes.c is our solution to the first problem of the assignment, shared_mem_seg.c is our
-solution to the second problem of the assigment, and matrix_mul.c is our solution
+solution to the second problem of the assignment, and matrix_mul.c is our solution
 to the third problem of the assignment. The following sections describe how to compile
 and run our code, as well as details about the code and why we designed the code the way
 we did. 
@@ -59,7 +59,7 @@ for the shared memory segment. According to the man page for shmctl (http://man7
 the mode that is returned from the ipc_perm structure contains the permission bits + SHM_DEST 
 + SHM_LOCKED. Therefore, for the mode, we purposefully apply a bitwise AND to it with octal 777 so 
 that only the permission bits are shown. We also print out the english meaning of the mode as its
-described in the table shown in the assigment instructions.
+described in the table shown in the assignment instructions.
 
 To run shared_mem_seg.c, first compile with make then type
 
@@ -90,7 +90,8 @@ To run matrix_mul.c, first compile it with make and then type
 where A.txt is the file containing the first matrix and B.txt is the file containing the second
 matrix. We have included two sample matrix files (A.txt and B.txt) in this directory that you can 
 run with our program. The format of these files obeys the requirements defined in the assignment 
-instructions. Our program also contains default matrices (as defined in the assignment instructions) that willbe multiplied if no input files are provided. 
+instructions. Our program also contains default matrices (as defined in the assignment instructions) 
+that will be multiplied if no input files are provided. 
 
 To run the program with the default matrices, first compile it with make then type
 
