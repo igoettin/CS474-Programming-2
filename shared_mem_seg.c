@@ -7,7 +7,7 @@ Authors:
     Hang Ngo
 
 Description of program:
-    This is our solution to question 2 of the CS474 Programming #2 Assignment.
+    This is our solution to problem 2 of the CS474 Programming #2 Assignment.
     This program will print out values for a shared memory segment using the shmid_ds structure in conjunction with the shmctl() function.
     The values that are printed out include: Segment ID, Key, Mode, Owner UID, Size, and Number of attaches.
 */
