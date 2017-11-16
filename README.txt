@@ -55,10 +55,7 @@ shared_mem_seg.c contains our solution to problem 2 of the programming assignmen
 takes as input, from the command line, a shared memory segment identifier and invokes the
 shmctl() function to obtain the shmid_ds structure that corresponds to the shared memory segment.
 The program then prints out the Segment ID, Key, Mode, Owner UID, Size, and the Number of Attaches
-for the shared memory segment. According to the man page for shmctl (http://man7.org/linux/man-pages/man2/shmctl.2.html),
-the mode that is returned from the ipc_perm structure contains the permission bits + SHM_DEST 
-+ SHM_LOCKED. Therefore, for the mode, we purposefully apply a bitwise AND to it with octal 777 so 
-that only the permission bits are shown. We also print out the english meaning of the mode as its
+for the shared memory segment. We also print out the english meaning of the mode as its
 described in the table shown in the assignment instructions.
 
 To run shared_mem_seg.c, first compile with make then type

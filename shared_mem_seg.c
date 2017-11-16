@@ -40,9 +40,7 @@ void print_shared_memory_values(int segment_id){
     printf("-------------------------------------\n");
     printf("Segment ID: %d\n",segment_id);
     printf("Key (in hexadecimal): 0x%x\n",shmbuffer.shm_perm.__key);
-    //The mode will include permissions + SHM_DEST flag + SHM_LOCKED flag
-    //Since we are only interested in the permissions, a bitwise and is used on the mode with octal 777.
-    unsigned short mode = shmbuffer.shm_perm.mode & 0777;
+    unsigned short mode = shmbuffer.shm_perm.mode;
     printf("Mode (in octal, permission bits only): %ho\n",mode);
     //Print the english meaning of the mode
     printf("English meaning of the mode for the shared memory segment:\n");
