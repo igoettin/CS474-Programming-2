@@ -41,7 +41,7 @@ void print_shared_memory_values(int segment_id){
     printf("Segment ID: %d\n",segment_id);
     printf("Key (in hexadecimal): 0x%x\n",shmbuffer.shm_perm.__key);
     unsigned short mode = shmbuffer.shm_perm.mode;
-    printf("Mode (in octal, permission bits only): %ho\n",mode);
+    printf("Mode (in octal): %ho\n",mode);
     //Print the english meaning of the mode
     printf("English meaning of the mode for the shared memory segment:\n");
     if(mode & 0400) printf("\tRead permission of owner.\n");
